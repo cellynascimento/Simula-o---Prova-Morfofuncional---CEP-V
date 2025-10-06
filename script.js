@@ -1,4 +1,29 @@
 // Carrega o arquivo questions.json
+// === Cronômetro ===
+let tempoRestante = 1800; // 1800 segundos = 30 minutos
+const timerEl = document.getElementById('timer');
+
+function atualizarTimer() {
+  const minutos = Math.floor(tempoRestante / 60);
+  const segundos = tempoRestante % 60;
+  timerEl.textContent = `Tempo restante: ${minutos.toString().padStart(2,'0')}:${segundos.toString().padStart(2,'0')}`;
+
+  if (tempoRestante <= 0) {
+    clearInterval(contagem);
+    finalizarAutomaticamente();
+  } else {
+    tempoRestante--;
+  }
+}
+
+const contagem = setInterval(atualizarTimer, 1000);
+
+// Quando o tempo acabar:
+function finalizarAutomaticamente() {
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  document.getElementById('result').textContent = "⏰ Tempo esgotado!";
+}
 fetch('questions.json')
   .then(response => response.json())
   .then(perguntas => {
