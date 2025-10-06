@@ -1,90 +1,142 @@
-// === CONFIGURAÇÃO DO TEMPO ===
-// 30 minutos = 1800 segundos  (altere se quiser mais tempo)
-let tempoRestante = 1800; 
-let contagem; 
+// ======= CONFIGURAÇÃO DO TEMPO =======
+let tempoRestante = 1800; // 30 min (mude para 1800 = 30 min, etc.)
+let cronometroId = null;
 
-// === CRONÔMETRO ===
+// ======= ESTADO =======
+let perguntas = [];
+let idx = 0;                  // índice da questão atual
+let respostas = [];           // respostas do usuário (índice da alternativa ou null)
+
+// ======= UTIL =======
+const $ = (s) => document.querySelector(s);
+const fmt = (t) => {
+  const m = Math.floor(t / 60).toString().padStart(2, '0');
+  const s = (t % 60).toString().padStart(2, '0');
+  return `${m}:${s}`;
+};
+
+// ======= CRONÔMETRO =======
 function iniciarCronometro() {
-  const timerEl = document.getElementById('timer');
-
-  contagem = setInterval(() => {
-    const minutos = Math.floor(tempoRestante / 60);
-    const segundos = tempoRestante % 60;
-
-    // Atualiza o texto na tela
-    timerEl.textContent = `⏱️ Tempo restante: ${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
-
-    // Quando o tempo acabar
+  const timerEl = $("#timer");
+  timerEl.textContent = `⏱️ Tempo restante: ${fmt(tempoRestante)}`;
+  cronometroId = setInterval(() => {
+    tempoRestante--;
+    timerEl.textContent = `⏱️ Tempo restante: ${fmt(tempoRestante)}`;
     if (tempoRestante <= 0) {
-      clearInterval(contagem);
-      finalizarAutomaticamente();
-    } else {
-      tempoRestante--;
+      clearInterval(cronometroId);
+      finalizar("⏰ Tempo esgotado!");
     }
   }, 1000);
 }
 
-// === FUNÇÃO DE FINALIZAÇÃO AUTOMÁTICA ===
-function finalizarAutomaticamente() {
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = true;
-  document.getElementById('result').textContent = "⏰ Tempo esgotado! Suas respostas foram bloqueadas.";
+// ======= RENDER =======
+function render() {
+  const q = perguntas[idx];
+  $("#progress").textContent = `Questão ${idx + 1} de ${perguntas.length}`;
+  $("#question-text").textContent = q.pergunta || q.enunciado;
+
+  // Imagem (opcional)
+  const img = $("#question-image");
+  if (q.imagem) {
+    img.src = q.imagem;
+    img.alt = "Imagem da questão";
+    img.classList.remove("hidden");
+  } else {
+    img.classList.add("hidden");
+    img.removeAttribute("src");
+    img.removeAttribute("alt");
+  }
+
+  // Alternativas
+  const ul = $("#options");
+  ul.innerHTML = "";
+  (q.alternativas || []).forEach((alt, i) => {
+    const id = `q${idx}-alt${i}`;
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <input type="radio" id="${id}" name="q${idx}" ${respostas[idx] === i ? "checked" : ""}>
+      <label for="${id}"><strong>${String.fromCharCode(65+i)}.</strong> ${alt}</label>
+    `;
+    li.querySelector("input").addEventListener("change", () => {
+      respostas[idx] = i;
+    });
+    ul.appendChild(li);
+  });
+
+  // Botões
+  $("#prev-btn").disabled = idx === 0;
+  const ultima = idx === (perguntas.length - 1);
+  $("#next-btn").classList.toggle("hidden", ultima);
+  $("#finish-btn").classList.toggle("hidden", !ultima);
 }
 
-// === CARREGAR PERGUNTAS ===
-fetch('questions.json')
-  .then(response => response.json())
-  .then(perguntas => {
-    const container = document.getElementById('quiz-container');
-    const submitBtn = document.getElementById('submit-btn');
-    const result = document.getElementById('result');
+function proxima() {
+  if (idx < perguntas.length - 1) {
+    idx++;
+    render();
+  }
+}
+function anterior() {
+  if (idx > 0) {
+    idx--;
+    render();
+  }
+}
 
-    // Cria as perguntas dinamicamente
-    perguntas.forEach((q, i) => {
-      const div = document.createElement('div');
-      div.classList.add('question');
+// ======= FINALIZAÇÃO =======
+function finalizar(mensagem = null) {
+  if (cronometroId) clearInterval(cronometroId);
 
-      let html = `<h3>${q.pergunta}</h3>`;
+  // Corrigir
+  let acertos = 0;
+  const review = $("#review");
+  review.innerHTML = "";
 
-      // Se houver imagem, adiciona
-      if (q.imagem) {
-        html += `<img src="${q.imagem}" alt="Imagem da questão" style="max-width: 100%; border-radius: 8px; margin: 10px 0;">`;
-      }
+  perguntas.forEach((q, i) => {
+    const correta = q.correta;
+    const user = respostas[i];
+    if (user === correta) acertos++;
 
-      // Alternativas
-      q.alternativas.forEach((alt, index) => {
-        html += `
-          <label>
-            <input type="radio" name="q${i}" value="${index}">
-            ${alt}
-          </label><br>
-        `;
-      });
-
-      div.innerHTML = html;
-      container.appendChild(div);
-    });
-
-    // Botão Enviar
-    submitBtn.addEventListener('click', () => {
-      clearInterval(contagem); // Para o cronômetro ao enviar
-      let acertos = 0;
-
-      perguntas.forEach((q, i) => {
-        const selecionada = document.querySelector(`input[name="q${i}"]:checked`);
-        if (selecionada && parseInt(selecionada.value) === q.correta) {
-          acertos++;
-        }
-      });
-
-      result.textContent = `✅ Você acertou ${acertos} de ${perguntas.length} questões.`;
-      submitBtn.disabled = true;
-    });
-
-    // Inicia o cronômetro assim que o simulado carregar
-    iniciarCronometro();
-  })
-  .catch(error => {
-    document.getElementById('quiz-container').innerHTML = '<p>Erro ao carregar as perguntas.</p>';
-    console.error(error);
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <div><strong>${i + 1})</strong> ${q.pergunta || q.enunciado}</div>
+      ${q.imagem ? `<img src="${q.imagem}" alt="Imagem da questão" style="max-width:100%;border-radius:8px;margin:8px 0;">` : ""}
+      <div style="color:${user === correta ? '#0b7a41' : '#b42318'}">
+        Sua resposta: ${user != null ? `${String.fromCharCode(65+user)}. ${(q.alternativas||[])[user]}` : "—"}
+      </div>
+      <div class="correct">Correta: ${String.fromCharCode(65+correta)}. ${(q.alternativas||[])[correta]}</div>
+      <div class="muted">${q.explicacao || ""}</div>
+    `;
+    review.appendChild(li);
   });
+
+  $("#score").innerHTML = `<h3>Nota: ${acertos}/${perguntas.length}</h3>${mensagem ? `<p>${mensagem}</p>` : ""}`;
+
+  // Trocar telas
+  $("#quiz").classList.add("hidden");
+  $("#start-screen").classList.add("hidden");
+  $("#end-screen").classList.remove("hidden");
+}
+
+// ======= BOOT =======
+document.addEventListener("DOMContentLoaded", async () => {
+  // Carrega banco
+  const res = await fetch("questions.json", { cache: "no-store" });
+  perguntas = await res.json();
+
+  // Preparar estado
+  const n = perguntas.length;
+  respostas = Array(n).fill(null);
+  idx = 0;
+
+  // Eventos
+  $("#start-btn").addEventListener("click", () => {
+    $("#start-screen").classList.add("hidden");
+    $("#quiz").classList.remove("hidden");
+    iniciarCronometro();
+    render();
+  });
+  $("#next-btn").addEventListener("click", proxima);
+  $("#prev-btn").addEventListener("click", anterior);
+  $("#finish-btn").addEventListener("click", () => finalizar());
+});
