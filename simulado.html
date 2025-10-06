@@ -5,22 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Simulado CEP V – Vasos Sanguíneos</title>
   <link rel="stylesheet" href="styles.css" />
-  <script defer src="script.js"></script>
+  <!-- cache-buster pra garantir que pegue o JS novo -->
+  <script defer src="script.js?v=3"></script>
 </head>
 <body class="container">
   <header class="header">
     <h1>Simulado CEP V – Vasos Sanguíneos</h1>
-    <div id="timer" class="badge">⏱️ Tempo restante: 30:00</div>
+    <div id="timer" class="badge">⏱️ Tempo restante: 10:00</div>
   </header>
 
-  <!-- Tela inicial -->
+  <!-- TELA INICIAL (aparece sozinha ao abrir) -->
   <section id="start-screen">
-    <p>O simulado apresenta <strong>uma questão por vez</strong>. Boa prova!</p>
+    <p>O simulado apresenta <strong>uma questão por vez</strong>. Clique em <strong>Iniciar</strong> para começar.</p>
     <button id="start-btn" class="btn">Iniciar</button>
   </section>
 
+  <!-- QUIZ (fica oculto até clicar em Iniciar) -->
+  <section id="quiz" class="hidden">
+    <h2 id="question-text">...</h2>
+    <img id="question-image" alt="" class="hidden" />
+    <ul id="options" class="options"></ul>
+    <div class="actions">
+      <button id="prev-btn" class="btn outline">Anterior</button>
+      <button id="next-btn" class="btn">Próxima</button>
+      <button id="finish-btn" class="btn primary hidden">Finalizar</button>
+    </div>
+  </section>
 
-  <!-- Resultado -->
+  <!-- RESULTADO (só aparece no fim) -->
   <section id="end-screen" class="hidden">
     <h2>Resultado</h2>
     <div id="score"></div>
