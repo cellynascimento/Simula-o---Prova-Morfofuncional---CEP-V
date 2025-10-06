@@ -1,28 +1,22 @@
 [
   {
-    "pergunta": "1. Qual das seguintes estruturas transporta sangue oxigenado do coração para os tecidos?",
-    "alternativas": ["Veias", "Átrios", "Artérias", "Vênulas"],
+    "pergunta": "1) Qual camada é a mais interna do vaso?",
+    "alternativas": ["Adventícia", "Média", "Íntima", "Pericárdio"],
     "correta": 2
   },
   {
-    "pergunta": "2. Qual é o principal tipo de célula presente na túnica íntima dos vasos sanguíneos?",
-    "alternativas": ["Fibroblastos", "Células endoteliais", "Mioblastos", "Macrófagos"],
-    "correta": 1
+    "pergunta": "2) Capilar contínuo é típico de:",
+    "alternativas": ["Fígado", "Baço", "SNC e músculo", "Endócrinas fenestradas"],
+    "correta": 2
   },
   {
-    "pergunta": "3. Observe a imagem abaixo e identifique o tipo de vaso mostrado:",
-    "imagem": "imagens/exemplo_vaso.png",
-    "alternativas": ["Artéria muscular", "Veia", "Capilar contínuo", "Capilar fenestrado"],
-    "correta": 0
-  },
-  {
-    "pergunta": "4. O endotélio desempenha qual destas funções?",
+    "pergunta": "3) Artéria elástica se caracteriza por:",
     "alternativas": [
-      "Secretar colágeno tipo II para a túnica média",
-      "Regular trocas entre sangue e tecidos",
-      "Produzir hemoglobina",
-      "Atuar como barreira mecânica apenas"
+      "Muita lâmina elástica na túnica média",
+      "Adventícia extremamente espessa sem vasa vasorum",
+      "Endotélio cúbico",
+      "Ausência de subendotélio"
     ],
-    "correta": 1
+    "correta": 0
   }
 ]
