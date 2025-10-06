@@ -1,5 +1,5 @@
 // ======= CONFIG =======
-let tempoRestante = 600; // 10 min
+let tempoRestante = 1800; // 30 min
 let cronometroId = null;
 
 let perguntas = [];
