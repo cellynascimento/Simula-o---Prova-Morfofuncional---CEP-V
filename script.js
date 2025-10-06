@@ -7,6 +7,24 @@ let perguntas = [];
 let idx = 0;                  // índice da questão atual
 let respostas = [];           // respostas do usuário (índice da alternativa ou null)
 
+document.addEventListener("DOMContentLoaded", async () => {
+  const res = await fetch("questions.json", { cache: "no-store" });
+  perguntas = await res.json();
+  respostas = Array(perguntas.length).fill(null);
+  idx = 0;
+
+  $("#start-btn").addEventListener("click", () => {
+    $("#start-screen").classList.add("hidden");
+    $("#quiz").classList.remove("hidden");
+    iniciarCronometro();
+    render();
+  });
+
+  $("#next-btn").addEventListener("click", proxima);
+  $("#prev-btn").addEventListener("click", anterior);
+  $("#finish-btn").addEventListener("click", () => finalizar());
+});
+
 // ======= UTIL =======
 const $ = (s) => document.querySelector(s);
 const fmt = (t) => {
@@ -29,13 +47,13 @@ function iniciarCronometro() {
   }, 1000);
 }
 
-// ======= RENDER =======
 function render() {
   const q = perguntas[idx];
-  $("#progress").textContent = `Questão ${idx + 1} de ${perguntas.length}`;
+
+  // enunciado
   $("#question-text").textContent = q.pergunta || q.enunciado;
 
-  // Imagem (opcional)
+  // imagem (opcional)
   const img = $("#question-image");
   if (q.imagem) {
     img.src = q.imagem;
@@ -46,6 +64,29 @@ function render() {
     img.removeAttribute("src");
     img.removeAttribute("alt");
   }
+
+  // alternativas
+  const ul = $("#options");
+  ul.innerHTML = "";
+  (q.alternativas || []).forEach((alt, i) => {
+    const id = `q${idx}-alt${i}`;
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <input type="radio" id="${id}" name="q${idx}" ${respostas[idx] === i ? "checked" : ""}>
+      <label for="${id}"><strong>${String.fromCharCode(65+i)}.</strong> ${alt}</label>
+    `;
+    li.querySelector("input").addEventListener("change", () => {
+      respostas[idx] = i;
+    });
+    ul.appendChild(li);
+  });
+
+  // botões
+  $("#prev-btn").disabled = idx === 0;
+  const ultima = idx === (perguntas.length - 1);
+  $("#next-btn").classList.toggle("hidden", ultima);
+  $("#finish-btn").classList.toggle("hidden", !ultima);
+}
 
   // Alternativas
   const ul = $("#options");
