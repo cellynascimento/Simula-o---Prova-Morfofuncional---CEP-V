@@ -1,29 +1,37 @@
-// Carrega o arquivo questions.json
-// === Cronômetro ===
-let tempoRestante = 1800; // 1800 segundos = 30 minutos
-const timerEl = document.getElementById('timer');
+// === CONFIGURAÇÃO DO TEMPO ===
+// 30 minutos = 1800 segundos  (altere se quiser mais tempo)
+let tempoRestante = 1800; 
+let contagem; 
 
-function atualizarTimer() {
-  const minutos = Math.floor(tempoRestante / 60);
-  const segundos = tempoRestante % 60;
-  timerEl.textContent = `Tempo restante: ${minutos.toString().padStart(2,'0')}:${segundos.toString().padStart(2,'0')}`;
+// === CRONÔMETRO ===
+function iniciarCronometro() {
+  const timerEl = document.getElementById('timer');
 
-  if (tempoRestante <= 0) {
-    clearInterval(contagem);
-    finalizarAutomaticamente();
-  } else {
-    tempoRestante--;
-  }
+  contagem = setInterval(() => {
+    const minutos = Math.floor(tempoRestante / 60);
+    const segundos = tempoRestante % 60;
+
+    // Atualiza o texto na tela
+    timerEl.textContent = `⏱️ Tempo restante: ${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+
+    // Quando o tempo acabar
+    if (tempoRestante <= 0) {
+      clearInterval(contagem);
+      finalizarAutomaticamente();
+    } else {
+      tempoRestante--;
+    }
+  }, 1000);
 }
 
-const contagem = setInterval(atualizarTimer, 1000);
-
-// Quando o tempo acabar:
+// === FUNÇÃO DE FINALIZAÇÃO AUTOMÁTICA ===
 function finalizarAutomaticamente() {
   const btn = document.getElementById('submit-btn');
   btn.disabled = true;
-  document.getElementById('result').textContent = "⏰ Tempo esgotado!";
+  document.getElementById('result').textContent = "⏰ Tempo esgotado! Suas respostas foram bloqueadas.";
 }
+
+// === CARREGAR PERGUNTAS ===
 fetch('questions.json')
   .then(response => response.json())
   .then(perguntas => {
@@ -38,12 +46,12 @@ fetch('questions.json')
 
       let html = `<h3>${q.pergunta}</h3>`;
 
-      // Se a questão tiver imagem, mostra
+      // Se houver imagem, adiciona
       if (q.imagem) {
         html += `<img src="${q.imagem}" alt="Imagem da questão" style="max-width: 100%; border-radius: 8px; margin: 10px 0;">`;
       }
 
-      // Cria as alternativas
+      // Alternativas
       q.alternativas.forEach((alt, index) => {
         html += `
           <label>
@@ -57,8 +65,9 @@ fetch('questions.json')
       container.appendChild(div);
     });
 
-    // Evento do botão Enviar
+    // Botão Enviar
     submitBtn.addEventListener('click', () => {
+      clearInterval(contagem); // Para o cronômetro ao enviar
       let acertos = 0;
 
       perguntas.forEach((q, i) => {
@@ -68,8 +77,12 @@ fetch('questions.json')
         }
       });
 
-      result.textContent = `Você acertou ${acertos} de ${perguntas.length} questões.`;
+      result.textContent = `✅ Você acertou ${acertos} de ${perguntas.length} questões.`;
+      submitBtn.disabled = true;
     });
+
+    // Inicia o cronômetro assim que o simulado carregar
+    iniciarCronometro();
   })
   .catch(error => {
     document.getElementById('quiz-container').innerHTML = '<p>Erro ao carregar as perguntas.</p>';
