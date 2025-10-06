@@ -14,5 +14,15 @@
     "imagem": "imagens/exemplo_vaso.png",
     "alternativas": ["Artéria muscular", "Veia", "Capilar contínuo", "Capilar fenestrado"],
     "correta": 0
+  },
+  {
+    "pergunta": "4. O endotélio desempenha qual destas funções?",
+    "alternativas": [
+      "Secretar colágeno tipo II para a túnica média",
+      "Regular trocas entre sangue e tecidos",
+      "Produzir hemoglobina",
+      "Atuar como barreira mecânica apenas"
+    ],
+    "correta": 1
   }
 ]
