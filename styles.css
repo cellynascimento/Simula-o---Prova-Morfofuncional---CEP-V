@@ -85,7 +85,7 @@ body {
 }
 
 /* Estilo apenas do gabarito gerado pelo script (class="correct") */
-.correct{
+.gabarito{
   text-align: justify;     /* alinha dos dois lados */
   margin-top: 14px;        /* espaço entre a pergunta/imagem e o gabarito */
   margin-bottom: 32px;     /* espaço depois do gabarito */
