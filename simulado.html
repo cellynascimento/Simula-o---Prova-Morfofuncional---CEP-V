@@ -3,38 +3,26 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Simulado CEP V – Mecanismos de Agressão e Defesa</title>
-
-  <!-- Fonte Montserrat (mais confiável que @import) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <!-- Força baixar o CSS novo -->
-  <link rel="stylesheet" href="styles.css?v=4">
-</head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Simulado CEP V – Mecanismos de Agressão e Defesa</title>
-  <link rel="stylesheet" href="styles.css?v=3">
+  <title>Simulado CEP V – Vasos Sanguíneos</title>
+  <link rel="stylesheet" href="styles.css" />
   <!-- cache-buster pra garantir que pegue o JS novo -->
   <script defer src="script.js?v=3"></script>
 </head>
 <body class="container">
   <header class="header">
-    <h1>Simulado CEP V – Mecanismos de Agressão e Defesa</h1>
-    <div id="timer" class="badge">⏱️ Tempo restante: 30:00</div>
+    <h1>Simulado CEP V – Vasos Sanguíneos</h1>
+    <div id="timer" class="badge">⏱️ Tempo restante: 10:00</div>
   </header>
 
   <!-- TELA INICIAL (aparece sozinha ao abrir) -->
   <section id="start-screen">
-    <p>O simulado apresenta <strong>uma questão por vez</strong>. Clique em <strong>Iniciar</strong> para o tempo começar a rodar.</p>
+    <p>O simulado apresenta <strong>uma questão por vez</strong>. Clique em <strong>Iniciar</strong> para começar.</p>
     <button id="start-btn" class="btn">Iniciar</button>
   </section>
 
   <!-- QUIZ (fica oculto até clicar em Iniciar) -->
   <section id="quiz" class="hidden">
-    <h2 id="question-text"></h2>
+    <h2 id="question-text">...</h2>
     <img id="question-image" alt="" class="hidden" />
     <ul id="options" class="options"></ul>
     <div class="actions">
