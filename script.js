@@ -33,6 +33,42 @@ function iniciarCronometro() {
     }
   }, 1000);
 }
+function letraFromIndex(i){ return String.fromCharCode(65 + i); } // 0→A, 1→B...
+function indexFromLetra(L){
+  if (typeof L !== "string") return -1;
+  const s = L.trim().toUpperCase();
+  return /^[A-Z]$/.test(s) ? (s.charCodeAt(0) - 65) : -1;
+}
+
+// Descobre o índice correto do gabarito (aceita letra "A-D", índice 0..n ou texto da alternativa)
+function resolveGabaritoIndex(q){
+  if (!Array.isArray(q.alternativas)) return -1;
+  if (typeof q.gabarito === "number") return q.gabarito;
+  if (typeof q.gabarito === "string"){
+    const s = q.gabarito.trim();
+    const byLetter = indexFromLetra(s);
+    if (byLetter >= 0) return byLetter;
+    const byText = q.alternativas.findIndex(a => String(a).trim() === s);
+    if (byText >= 0) return byText;
+  }
+  return -1;
+}
+
+// Converte a resposta do usuário para índice (aceita letra, índice ou texto)
+function resolveRespostaIndex(q, resp){
+  if (!Array.isArray(q.alternativas)) return -1;
+  if (typeof resp === "number") return resp;
+  if (typeof resp === "string"){
+    const s = resp.trim();
+    const byLetter = indexFromLetra(s);
+    if (byLetter >= 0) return byLetter;
+    const byText = q.alternativas.findIndex(a => String(a).trim() === s);
+    if (byText >= 0) return byText;
+    const asNum = Number(s);
+    if (!Number.isNaN(asNum)) return asNum;
+  }
+  return -1;
+}
 
 // ======= RENDERIZAÇÃO DE UMA QUESTÃO =======
 function render() {
