@@ -1,12 +1,17 @@
-[
-  {
-    "pergunta": "Questão 1 - Identifique o número e cite o nome da estrutura que faz parte do estroma, responsável pela distribuição da vascularização do órgão representado na imagem.",
-    "imagem": "imagens/Questão1.png",
-    "tipo": "dissertativa",
-    "gabarito": "Número 3 - Trabécula esplênica. Baço."
-     "aceitaveis": [
-    "trabecula.*estroma.*baco"      // citou trabécula esplênica + baço
-  },
+{
+  "pergunta": "Questão 1 - Identifique o número e cite o nome da estrutura que faz parte do estroma, responsável pela distribuição da vascularização do órgão representado na imagem.",
+  "imagem": "imagens/Questão1.png",
+  "tipo": "dissertativa",
+  "gabarito": "Número 3 - Trabécula esplênica. Baço.",
+  "aceitaveis": [
+    "3.*trabecula.*esplen",         // “3 - trabécula esplênica”
+    "numero\\s*3.*trabecula",       // “Número 3 trabécula…”
+    "trabecula.*baco",              // “trabécula … baço”
+    "trabeculas?\\s+esplen",        // “trabéculas esplên…”
+    "trabecula.*estroma.*baco"      // citou trabécula + estroma + baço
+  ]
+}
+,
   {
     "pergunta": "Questão 2 - Identifique a letra e cite o nome da estrutura formada por várias células presente no parênquima do timo que representa um marcador histológico desse órgão.",
     "imagem": "imagens/Questão2.png",
