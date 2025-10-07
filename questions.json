@@ -4,6 +4,8 @@
     "imagem": "imagens/Questão1.png",
     "tipo": "dissertativa",
     "gabarito": "Número 3 - Trabécula esplênica. Baço."
+     "aceitaveis": [
+    "trabecula.*estroma.*baco"      // citou trabécula esplênica + baço
   },
   {
     "pergunta": "Questão 2 - Identifique a letra e cite o nome da estrutura formada por várias células presente no parênquima do timo que representa um marcador histológico desse órgão.",
