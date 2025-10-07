@@ -84,14 +84,15 @@ body {
   resize: vertical;
 }
 
-.gabarito {
-  text-align: justify;              /* deixa o texto alinhado dos dois lados */
-  color: #333;                      /* cor neutra para o texto */
-  font-weight: 700;                 /* negrito */
+/* Estilo apenas do gabarito gerado pelo script (class="correct") */
+.correct{
+  text-align: justify;     /* alinha dos dois lados */
+  margin-top: 14px;        /* espaço entre a pergunta/imagem e o gabarito */
+  margin-bottom: 32px;     /* espaço depois do gabarito */
+  line-height: 1.6;
+  font-weight: 700;
+  color: #333;
   font-family: 'Montserrat', sans-serif;
-  margin-top: 15px;                 /* espaço entre o comando/imagem e o gabarito */
-  margin-bottom: 35px;              /* espaço após o gabarito */
-  line-height: 1.6;                 /* melhora a leitura */
 }
 
 /* =====*
