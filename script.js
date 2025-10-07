@@ -215,6 +215,29 @@ perguntas.forEach((q, i) => {
 });
 
 
+else if (Array.isArray(q.alternativas)) {
+  // OBJETIVA
+  const correctLetter = (typeof q.gabarito === "string") ? q.gabarito.trim().toUpperCase() : "";
+  const correctIdx = /^[A-Z]$/.test(correctLetter) ? (correctLetter.charCodeAt(0) - 65) : -1;
+
+  const respIdx = (typeof respostas[i] === "number") ? respostas[i] : -1;
+
+  const acertou = (correctIdx >= 0 && respIdx === correctIdx);
+  if (acertou) acertos++;
+
+  const letra = x => String.fromCharCode(65 + x);
+
+  const respLabel = (respIdx >= 0)
+    ? `${letra(respIdx)} - ${escapeHtml(q.alternativas[respIdx])}`
+    : "—";
+
+  const gabaritoLabel = (correctIdx >= 0)
+    ? `${letra(correctIdx)} - ${escapeHtml(q.alternativas[correctIdx])}`
+    : escapeHtml(q.gabarito || "");
+
+  blocoUsuario = `<div style="color:${acertou ? '#0b7a41' : '#b42318'}"><strong>Sua resposta:</strong> ${respLabel}</div>`;
+  blocoCorreta = `<div class="correct"><strong>Gabarito:</strong> ${gabaritoLabel}</div>`;
+}
 
     const li = document.createElement("li");
     li.innerHTML = `
