@@ -6,7 +6,7 @@
     "gabarito": "Número 3 - Trabécula esplênica. Baço."
   },
   {
-    "pergunta": "Questão 2 - Identifique a letra e cite o nome da estrutura formado por várias células presente no parênquima do timo que representa um marcador histológico desse órgão.",
+    "pergunta": "Questão 2 - Identifique a letra e cite o nome da estrutura formada por várias células presente no parênquima do timo que representa um marcador histológico desse órgão.",
     "imagem": "imagens/Questão2.png",
     "tipo": "dissertativa",
     "gabarito": "Letra A - Corpúsculo de Hassall."
@@ -16,25 +16,26 @@
     "imagem": "imagens/Questão3.png",
     "tipo": "multipla_escolha",
     "alternativas": [
-      "A - Tonsila faríngea; B - Tonsila tubária; C - Tonsila palatina; D - Tonsilas linguais.",
-      "A - Tonsila faríngea; B - Tonsila tubária; C - Tonsila linguais; D - Tonsilas palatinas.",
-      "A - Tonsila palatina; B - Tonsila linguais; C - Tonsila faríngea; D - Tonsila tubária.",
-      "A - Tonsila tubária; B - Tonsila palatina; C - Tonsila linguais; D - Tonsila faríngea."
+      "A) A - Tonsila faríngea; B - Tonsila tubária; C - Tonsilas linguais; D - Tonsilas palatinas.",
+      "B) A - Tonsila palatina; B - Tonsilas linguais; C - Tonsila faríngea; D - Tonsila tubária.",
+      "C) A - Tonsila tubária; B - Tonsila palatina; C - Tonsilas linguais; D - Tonsila faríngea.",
+      "D) A - Tonsila faríngea; B - Tonsila tubária; C - Tonsilas palatinas; D - Tonsilas linguais."
     ],
-    "gabarito": "Alternativa A"
+    "correta": 3,
+    "gabarito": "Letra D."
   },
   {
     "pergunta": "Questão 4 - Nomeie as regiões histológicas numeradas (1 e 2).",
     "imagem": "imagens/Questão4.png",
     "tipo": "dissertativa",
-    "gabarito": "1 - Córtex tímico e 2 - Medula tímica."
+    "gabarito": "1 - Córtex tímico; 2 - Medula tímica."
   },
   {
     "pergunta": "Questão 5 - Indique o órgão apontado pela letra A e sua vascularização.",
     "imagem": "imagens/Questão5.png",
     "tipo": "dissertativa",
     "gabarito": "Timo e artérias e veias tímicas.",
-    "complemento": "Vascularização do timo: Artérias — ramos das tireoideas inferiores e torácicas internas. Veias — drenam para braquiocefálica esquerda, tireoideas inferiores e torácicas internas."
+    "complemento": "Vascularização do timo — Artérias: ramos das tireoideas inferiores e torácicas internas. Veias: drenam para braquiocefálica esquerda, tireoideas inferiores e torácicas internas."
   },
   {
     "pergunta": "Questão 6 - Identifique a veia apontada pela letra D.",
@@ -47,12 +48,13 @@
     "imagem": "imagens/Questão7.png",
     "tipo": "multipla_escolha",
     "alternativas": [
-      "Fagocitose de microrganismos e restos celulares.",
-      "Produção de anticorpos e ativação da resposta imune adaptativa.",
-      "Liberação de histamina e heparina em processos alérgicos.",
-      "Eliminação de helmintos por grânulos citotóxicos específicos."
+      "a) Fagocitose de microrganismos e restos celulares.",
+      "b) Produção de anticorpos e ativação da resposta imune adaptativa.",
+      "c) Liberação de histamina e heparina em processos alérgicos.",
+      "d) Eliminação de helmintos por grânulos citotóxicos específicos."
     ],
-    "gabarito": "Letra B - Produção de anticorpos e ativação da resposta imune adaptativa."
+    "correta": 1,
+    "gabarito": "Letra B."
   },
   {
     "pergunta": "Questão 8 - CITE a veia apontada pela seta preta maior, incluindo sua lateralidade.",
@@ -71,5 +73,79 @@
     "imagem": "imagens/Questão10.png",
     "tipo": "dissertativa",
     "gabarito": "Veia esplênica e veia mesentérica superior — formam a veia porta hepática."
+  },
+  {
+    "pergunta": "Questão 11 - Identifique o tipo celular destacado e em qual tipo de reação inflamatória ele está presente.",
+    "imagem": "imagens/Questão11.png",
+    "tipo": "dissertativa",
+    "gabarito": "Tipo celular: Célula gigante de Langhans. Reação: inflamação granulomatosa (crônica)."
+  },
+  {
+    "pergunta": "Questão 12 - Identifique o tipo de infiltrado inflamatório predominante na miocardite chagásica.",
+    "imagem": "imagens/Questão12.png",
+    "tipo": "dissertativa",
+    "gabarito": "Infiltrado inflamatório mononuclear."
+  },
+  {
+    "pergunta": "Questão 13 - Dentre as diferentes lâminas mostradas acima, identifique qual a numeração/letra representa um processo inflamatório crônico.",
+    "imagem": "imagens/Questão13.png",
+    "tipo": "dissertativa",
+    "gabarito": "Letra D."
+  },
+  {
+    "pergunta": "Questão 14 - Um paciente apresenta dor intensa, calor, rubor e edema em torno de uma ferida infectada no braço após queda de bicicleta há 24 horas. Ao exame histológico da área, nota-se infiltrado celular predominante. Qual é a célula predominante na inflamação aguda inicial?",
+    "imagem": "imagens/Questão14.png",
+    "tipo": "dissertativa",
+    "gabarito": "Neutrófilos."
+  },
+  {
+    "pergunta": "Questão 15 - A formação de granulomas é uma característica típica da inflamação crônica. Qual é a principal função do granuloma?",
+    "imagem": "imagens/Questão15.png",
+    "tipo": "multipla_escolha",
+    "alternativas": [
+      "a) Dissolver proteínas plasmáticas.",
+      "b) Encapsular agentes de difícil eliminação.",
+      "c) Induzir necrose fibrinoide.",
+      "d) Promover angiogênese."
+    ],
+    "correta": 1,
+    "gabarito": "Letra B."
+  },
+  {
+    "pergunta": "Questão 16 - Identifique a alteração celular apontada pela seta e o principal órgão acometido por esse tipo de lesão.",
+    "imagem": "imagens/Questão16.png",
+    "tipo": "dissertativa",
+    "gabarito": "Degeneração gordurosa (esteatose) no fígado."
+  },
+  {
+    "pergunta": "Questão 17 - O material corado de rosa intenso e aspecto vítreo no citoplasma indica qual tipo de degeneração? Considere a seta menor.",
+    "imagem": "imagens/Questão17.png",
+    "tipo": "dissertativa",
+    "gabarito": "Degeneração hialina."
+  },
+  {
+    "pergunta": "Questão 18 - A lâmina mostra acúmulo de qual substância no citoplasma?",
+    "imagem": "imagens/Questão18.png",
+    "tipo": "dissertativa",
+    "gabarito": "Glicogênio."
+  },
+  {
+    "pergunta": "Questão 19 - Identifique a morfologia bacteriana e um exemplo de bactéria com esse padrão.",
+    "imagem": "imagens/Questão19.png",
+    "tipo": "dissertativa",
+    "gabarito": "Cocos em cadeia. Exemplo: Streptococcus pyogenes."
+  },
+  {
+    "pergunta": "Questão 20 - A tumefação celular com citoplasma claro e vacúolos aquosos é causada principalmente por:",
+    "imagem": "imagens/Questão20.png",
+    "tipo": "multipla_escolha",
+    "alternativas": [
+      "a) Aumento de proteínas citoplasmáticas.",
+      "b) Falha na bomba Na⁺/K⁺-ATPase.",
+      "c) Ativação de lisossomos.",
+      "d) Acúmulo de lipofuscina."
+    ],
+    "correta": 1,
+    "gabarito": "Letra B."
   }
 ]
