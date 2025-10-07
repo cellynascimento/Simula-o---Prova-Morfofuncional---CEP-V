@@ -368,3 +368,45 @@ document.addEventListener("DOMContentLoaded", async () => {
     mostrarErro("Falha ao carregar questions.json. Verifique o nome, o caminho e o formato. " + e.message);
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const startBtn    = document.getElementById("start-btn");
+  const startScreen = document.getElementById("start-screen");
+  const quizScreen  = document.getElementById("quiz-screen");
+
+  if (!startBtn || !startScreen || !quizScreen) {
+    console.error("IDs não encontrados no HTML: start-btn, start-screen, quiz-screen.");
+    return;
+  }
+
+  startBtn.disabled = true; // habilita quando carregar as questões
+
+  async function carregarQuestoes() {
+    try {
+      const resp = await fetch("questions.json?v=6"); // cache-buster
+      if (!resp.ok) throw new Error("questions.json não encontrado");
+      window.perguntas = await resp.json();
+      startBtn.disabled = false;
+    } catch (e) {
+      console.error(e);
+      // Mesmo sem perguntas, permite iniciar para ver a troca de tela (ajuda a diagnosticar)
+      startBtn.disabled = false;
+    }
+  }
+
+  startBtn.addEventListener("click", () => {
+    // troca para a tela do quiz
+    startScreen.classList.add("hidden");
+    quizScreen.classList.remove("hidden");
+
+    // inicia timer + mostra primeira questão
+    if (typeof iniciarProva === "function") {
+      iniciarProva(); // sua função que zera contador e chama renderQuestion(0)
+    } else if (typeof renderQuestion === "function") {
+      renderQuestion(0);
+    }
+  });
+
+  carregarQuestoes();
+});
+
