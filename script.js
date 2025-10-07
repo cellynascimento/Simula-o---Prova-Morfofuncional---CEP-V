@@ -119,25 +119,36 @@ function render() {
     // Insere logo abaixo das alternativas (a UL está vazia mesmo)
     ul.parentNode.insertBefore(ta, ul.nextSibling);
 
-  } else {
-    // Múltipla escolha (default)
-    if (!Array.isArray(q.alternativas) || q.alternativas.length === 0) {
-      mostrarErro("Questão de múltipla escolha sem 'alternativas'. Verifique o questions.json.");
-      return;
-    }
-    q.alternativas.forEach((alt, i) => {
-      const id = `q${idx}-alt${i}`;
-      const li = document.createElement("li");
-      li.innerHTML = `
-        <input type="radio" id="${id}" name="q${idx}" ${respostas[idx] === i ? "checked" : ""}>
-        <label for="${id}"><strong>${String.fromCharCode(65+i)}.</strong> ${alt}</label>
-      `;
-      li.querySelector("input").addEventListener("change", () => {
-  respostas[idxPergunta] = iAlternativa; // salva o índice (0..n)
+  } // ==== OBJETIVA (múltipla escolha) ====
+// Garante que as alternativas aparecem como radios e salvam o índice marcado
+ul.innerHTML = ""; // zera a UL caso venha de outra questão
+
+q.alternativas.forEach((textoAlt, iAlt) => {
+  const li = document.createElement("li");
+
+  const idRadio = `q${idx}-alt${iAlt}`;
+
+  const input = document.createElement("input");
+  input.type = "radio";
+  input.name = `q${idx}`;       // MESMO name para todas as alternativas da mesma questão
+  input.id = idRadio;
+  input.value = iAlt;           // valor = índice da alternativa
+  input.checked = (respostas[idx] === iAlt);
+
+  // >>> ESTE É O PONTO-CHAVE: salva o índice escolhido (0..n)
+  input.addEventListener("change", () => {
+    respostas[idx] = iAlt;
+  });
+
+  const label = document.createElement("label");
+  label.setAttribute("for", idRadio);
+  label.innerHTML = `<strong>${String.fromCharCode(65 + iAlt)})</strong> ${escapeHtml(textoAlt)}`;
+
+  li.appendChild(input);
+  li.appendChild(label);
+  ul.appendChild(li);
 });
-      ul.appendChild(li);
-    });
-  }
+
 
   // botões
   $("#prev-btn").disabled = idx === 0;
