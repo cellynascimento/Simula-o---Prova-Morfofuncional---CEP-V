@@ -1,47 +1,43 @@
-/* Corpo geral */
+/* Importante: define a fonte e o fundo */
 body {
   font-family: 'Montserrat', sans-serif;
   background-color: #fdf7f0;
   color: #333;
   margin: 0;
   padding: 0;
-
-  /* Centraliza tudo na tela */
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-
   min-height: 100vh;
-  text-align: center;
 }
 
-/* Container principal */
+/* Centraliza o conteúdo */
 .container {
   width: 100%;
   max-width: 800px;
   padding: 20px;
-  box-sizing: border-box;
+  text-align: center;
 }
 
-/* Bloco de conteúdo */
+/* Retângulo de conteúdo */
 .content {
   background: #fffaf2;
   border: 1px solid #e5d5b8;
   border-radius: 8px;
   padding: 30px;
-  margin: 20px auto;
+  margin: 20px 0;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   text-align: justify;
   font-size: 10pt;
   line-height: 1.6;
 }
 
-/* Título */
+/* Cabeçalho */
 .header h1 {
   text-align: center;
   font-size: 28px;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-top: 20px;
 }
 
 /* Botão */
@@ -66,7 +62,6 @@ body {
 /* Rodapé */
 .footer {
   font-size: 9pt;
-  margin-top: 20px;
+  margin: 30px 0 10px 0;
   color: #666;
-  text-align: center;
 }
