@@ -94,6 +94,12 @@ body {
   color: #333;
   font-family: 'Montserrat', sans-serif;
 }
+/* Remove a numeração automática das listas de revisão */
+#review {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
 
 /* =====*
 
